@@ -63,12 +63,41 @@ public class Fila {
 		}
 		return this.fila[head];
 	}
-	
+
 	public String toString(){
 		String saida = "";
-		for (int i = this.head; i < this.tail; i++) {
+		for (int i = this.head; i <= this.tail; i++) {
 			saida += fila[i] + " ";
 		}
 		return saida.trim();
 	}
+
+	public static void main(String[] args) {
+		Fila fila = new Fila(10);
+		assert fila.isEmpty();
+		fila.add(2);
+		fila.add(5);
+		fila.add(7);
+		assert fila.head() == 2;
+		assert fila.remove() == 2;
+		assert fila.head() == 5;
+		fila.add(3);
+		fila.add(1);
+		fila.add(10);
+		fila.add(9);
+		fila.add(4);
+		fila.add(6);
+
+		assert fila.remove() == 5;
+		assert fila.head() == 7;
+
+		fila.add(2);
+		assert fila.isFull() == false;
+
+		fila.add(14);
+		fila.add(29);
+		System.out.println(fila);
+		assert fila.isFull();
+	}
+
 }
