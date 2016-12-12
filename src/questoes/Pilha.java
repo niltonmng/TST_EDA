@@ -61,21 +61,14 @@ public class Pilha {
 		if(this.isEmpty()){
 			throw new RuntimeException("EmptyStackException");
 		}
-		Pilha aux = new Pilha(this.size());
 		int maior = this.pilha[topo];
 		int indexMaior = topo;
-		for (int i = this.topo; i >= 0; i--) {
-			if(this.pilha[i] > maior){
+		for (int i = pilha.length-1; i >= 0; i--) {
+			if(pilha[i] > maior){
 				maior = pilha[i];
 				indexMaior = i;
 			}
-			aux.push(this.pop());
 		}
-		
-		for (int i = this.topo; i >= 0; i--) {
-			this.push(aux.pop());
-		}
-		
 		return indexMaior;
 	}
 	
@@ -131,6 +124,8 @@ public class Pilha {
         assert pilha.peek() == 7;
         pilha.pop();
 
+        System.out.println(pilha);
+        System.out.println();
         assert !pilha.isEmpty();
     	assert pilha.getIndexMax() == 0;
 		pilha.push(20);
