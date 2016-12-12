@@ -6,11 +6,13 @@ public class Fila {
 	private int head;
 	private int tail;
 	private int[] fila;
+	//private int elementos;
 
 	public Fila(int capacidade){
 		this.capacidade = capacidade;
 		this.head = -1;
 		this.tail = -1;
+		//this.elementos = 0;
 		this.fila = new int[capacidade];
 	}
 
@@ -22,23 +24,30 @@ public class Fila {
 	}
 
 	public boolean isFull(){
+		//if(this.elementos == this.capacidade){
+		//	return true;
+		//}
 		return ((this.tail + 1) % capacidade) == this.head;
+		//return false;
 	}
 
 	public boolean add(int n){
 		if(this.isFull()){
 			throw new RuntimeException("FullQueueException!");			
 		}
+		
+		//this.elementos += 1;
+		
 		if(this.isEmpty()){
 			this.head = 0;
 			this.tail = 0;
 			this.fila[tail] = n;
-			return true;
 		}else{
 			this.tail = (this.tail + 1) % capacidade;
 			this.fila[tail] = n;
-			return true;
 		}
+		
+		return true;
 	}
 
 	public int remove(){
@@ -54,6 +63,7 @@ public class Fila {
 		}else{
 			this.head = ((this.head + 1) % capacidade); // a cabeça anda uma posição, partindo de sua posição atual.(claramente, a primeira remoção parte da posição inicial).
 		}
+		//this.elementos -= 1;
 		return removido;
 	}
 
@@ -71,33 +81,4 @@ public class Fila {
 		}
 		return saida.trim();
 	}
-
-	public static void main(String[] args) {
-		Fila fila = new Fila(10);
-		assert fila.isEmpty();
-		fila.add(2);
-		fila.add(5);
-		fila.add(7);
-		assert fila.head() == 2;
-		assert fila.remove() == 2;
-		assert fila.head() == 5;
-		fila.add(3);
-		fila.add(1);
-		fila.add(10);
-		fila.add(9);
-		fila.add(4);
-		fila.add(6);
-
-		assert fila.remove() == 5;
-		assert fila.head() == 7;
-
-		fila.add(2);
-		assert fila.isFull() == false;
-
-		fila.add(14);
-		fila.add(29);
-		System.out.println(fila);
-		assert fila.isFull();
-	}
-
 }
