@@ -6,14 +6,14 @@ import javax.swing.SwingConstants;
 
 public class Pilha {
 
-	private int[] pilha;
+	private String[] pilha;
 	private int capacidade;
 	private int topo;
 
 	public Pilha(int capacidade){
 		this.capacidade = capacidade;
 		this.topo = -1;
-		this.pilha = new int[capacidade];
+		this.pilha = new String[capacidade];
 	}
 
 
@@ -32,7 +32,7 @@ public class Pilha {
 		return false;
 	}
 
-	public boolean push(int n){
+	public boolean push(String n){
 		if(!this.isFull()){
 			this.topo += 1;
 			this.pilha[topo] = n;
@@ -41,16 +41,16 @@ public class Pilha {
 		throw new RuntimeException("FullStackException");
 	}
 
-	public int pop(){
+	public String pop(){
 		if(this.isEmpty()){
 			throw new RuntimeException("EmptyStackException");
 		}
-		int valorTopo = this.pilha[topo];
+		String valorTopo = this.pilha[topo];
 		this.topo -= 1;
 		return valorTopo;
 	}
 
-	public int peek(){
+	public String peek(){
 		if(this.isEmpty()){
 			throw new RuntimeException("EmptyStackException");
 		}
@@ -61,7 +61,7 @@ public class Pilha {
 		return this.topo + 1;
 	}
 
-	public int getIndexMax(){
+	/*public int getIndexMax(){
 		if(this.isEmpty()){
 			throw new RuntimeException("EmptyStackException");
 		}
@@ -94,13 +94,17 @@ public class Pilha {
 			saida += this.pilha[i] + " ";
 		}
 		return saida.trim();
-	}
+	}*/
 
 	public static void main(String[] args) {
 
-		Scanner sc = new Scanner(System.in);	
+		Scanner sc = new Scanner(System.in);
 		
-		String tamanho = sc.nextLine();
+		String parenteses = sc.nextLine();
+		Parenteses p = new Parenteses();
+		System.out.println(p.parenteses(parenteses));
+		
+		/*String tamanho = sc.nextLine();
 		Pilha pilha = new Pilha(Integer.parseInt(tamanho));
 		
 		String[] entrada = sc.nextLine().split(" ");
@@ -134,6 +138,32 @@ public class Pilha {
 				System.out.println(pilha.peek());
 			}
 			entrada = sc.nextLine().split(" ");
+		}*/
+	}
+}
+
+class Parenteses{
+	
+	public String parenteses(String entrada){
+		String[] str = entrada.split("");
+		Pilha p = new Pilha(str.length/2);
+		
+		if(str[0].equals(")")){
+			return "N";
+		}
+		else{
+			for (int i = 0; i < str.length; i++) {
+				if(str[i].equals("(")){
+					p.push(str[i]);
+				}else{
+					p.pop();
+				}
+			}
+		}
+		if(p.isEmpty()){
+			return "S";
+		}else{			
+			return "N";
 		}
 	}
 }
