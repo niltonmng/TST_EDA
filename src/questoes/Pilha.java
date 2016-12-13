@@ -2,8 +2,6 @@ package questoes;
 
 import java.util.Scanner;
 
-import javax.swing.SwingConstants;
-
 public class Pilha {
 
 	private int[] pilha;
@@ -100,10 +98,6 @@ public class Pilha {
 
 		Scanner sc = new Scanner(System.in);
 		
-		//String parenteses = sc.nextLine();
-		//Parenteses p = new Parenteses();
-		//System.out.println(p.parenteses(parenteses));
-		
 		String tamanho = sc.nextLine();
 		Pilha pilha = new Pilha(Integer.parseInt(tamanho));
 		
@@ -141,29 +135,3 @@ public class Pilha {
 		}
 	}
 }
-
-/*class Parenteses{
-	
-	public String parenteses(String entrada){
-		String[] str = entrada.split("");
-		Pilha p = new Pilha(str.length/2);
-		
-		if(str[0].equals(")")){
-			return "N";
-		}
-		else{
-			for (int i = 0; i < str.length; i++) {
-				if(str[i].equals("(")){
-					p.push(str[i]);
-				}else{
-					p.pop();
-				}
-			}
-		}
-		if(p.isEmpty()){
-			return "S";
-		}else{
-			return "N";
-		}
-	}
-}*/
