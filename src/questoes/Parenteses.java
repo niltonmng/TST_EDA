@@ -12,6 +12,9 @@ public class Parenteses {
 		}
 		else{
 			for (int i = 0; i < str.length; i++) {
+				if(p.isEmpty()){
+					return "N";
+				}
 				if(str[i].equals("(")){
 					p.push(str[i]);
 				}else{
