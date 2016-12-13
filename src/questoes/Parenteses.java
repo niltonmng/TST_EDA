@@ -5,19 +5,20 @@ public class Parenteses {
 
 	public String parenteses(String entrada){
 		String[] str = entrada.split("");
-		Stack p = new Stack(str.length/2);
+		Stack p = new Stack(str.length);
 
 		if(str[0].equals(")")){
 			return "N";
 		}
 		else{
 			for (int i = 0; i < str.length; i++) {
-				if(p.isEmpty()){
-					return "N";
-				}
 				if(str[i].equals("(")){
 					p.push(str[i]);
-				}else{
+				}
+				else if(p.isEmpty()){
+					return "N";
+				}
+				else {
 					p.pop();
 				}
 			}
