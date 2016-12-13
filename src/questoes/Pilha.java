@@ -1,33 +1,37 @@
 package questoes;
 
+import java.util.Scanner;
+
+import javax.swing.SwingConstants;
+
 public class Pilha {
 
 	private int[] pilha;
 	private int capacidade;
 	private int topo;
-	
+
 	public Pilha(int capacidade){
 		this.capacidade = capacidade;
 		this.topo = -1;
 		this.pilha = new int[capacidade];
 	}
-	
-	
+
+
 	public boolean isEmpty(){
 		if(this.topo == -1){
 			return true;
 		}
 		return false;
 	}
-	
-	
+
+
 	public boolean isFull(){
 		if(this.topo == (capacidade - 1)){
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean push(int n){
 		if(!this.isFull()){
 			this.topo += 1;
@@ -36,7 +40,7 @@ public class Pilha {
 		}
 		throw new RuntimeException("FullStackException");
 	}
-	
+
 	public int pop(){
 		if(this.isEmpty()){
 			throw new RuntimeException("EmptyStackException");
@@ -45,18 +49,18 @@ public class Pilha {
 		this.topo -= 1;
 		return valorTopo;
 	}
-	
+
 	public int peek(){
 		if(this.isEmpty()){
 			throw new RuntimeException("EmptyStackException");
 		}
 		return this.pilha[topo];
 	}
-	
+
 	public int size(){
 		return this.topo + 1;
 	}
-	
+
 	public int getIndexMax(){
 		if(this.isEmpty()){
 			throw new RuntimeException("EmptyStackException");
@@ -71,7 +75,7 @@ public class Pilha {
 		}
 		return indexMaior;
 	}
-	
+
 	public Pilha inverte(){
 		Pilha aux  = new Pilha(capacidade);
 		for (int i = this.size()-1; i >= 0; i--) {
@@ -79,63 +83,57 @@ public class Pilha {
 		}
 		return aux;
 	}
-	
+
 	public int[] getPilha(){
 		return this.pilha;
 	}
-	
-	/*public void inverte(){
-		Pilha aux  = new Pilha(capacidade);
-		for (int i = this.size()-1; i >= 0; i--) {
-			aux.push(this.pop());
-		}
-		
-		for (int i = 0; i < pilha.length; i++) {
-			this.push(aux.getPilha()[i]);
-		}
-	}*/
-	
+
 	public String toString(){
 		String saida = "";
-		for (int i = topo; i >= 0; i--) {
-			saida += this.pilha[i] + "\n";
+		for (int i = 0; i < topo+1; i++) {
+			saida += this.pilha[i] + " ";
 		}
 		return saida.trim();
 	}
-	
+
 	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);	
 		
-		Pilha pilha = new Pilha(5);
-        assert pilha.isEmpty();
-        assert !pilha.isFull();
-        assert pilha.size() == 0;
-    
-        pilha.push(10);
-        assert pilha.peek() == 10;
-        assert pilha.size() == 1;
-        assert !pilha.isEmpty();
-    
-        pilha.push(5);
-        assert pilha.size() == 2;
-
-        assert pilha.pop() == 5;
-
-        pilha.push(7);
-        assert pilha.peek() == 7;
-        pilha.pop();
-
-        System.out.println(pilha);
-        System.out.println();
-        assert !pilha.isEmpty();
-    	assert pilha.getIndexMax() == 0;
-		pilha.push(20);
-		assert pilha.getIndexMax() == 2;
-		pilha.push(3);
-		pilha.push(4);
-		pilha.pop();
+		String tamanho = sc.nextLine();
+		Pilha pilha = new Pilha(Integer.parseInt(tamanho));
 		
-		System.out.println(pilha);
-		System.out.println();
-		System.out.println(pilha.inverte());
+		String[] entrada = sc.nextLine().split(" ");
+		
+		while(true){
+			if(entrada[0].toUpperCase().equals("END")){
+				break;
+			}
+			if(entrada[0].toUpperCase().equals("PRINT")){
+				if(pilha.isEmpty()){
+					System.out.println("empty");
+				}else{
+					System.out.println(pilha.toString());
+				}
+			}
+			else if(entrada[0].toUpperCase().equals("POP")){
+				if(pilha.isEmpty()){
+					System.out.println("empty");
+				}else{
+					pilha.pop();					
+				}
+			}
+			else if(entrada[0].toUpperCase().equals("PUSH")){
+				if(pilha.isFull()){
+					System.out.println("full");
+				}else{
+					pilha.push(Integer.parseInt(entrada[1]));					
+				}
+			}
+			else if(entrada[0].toUpperCase().equals("PEEK")){
+				System.out.println(pilha.peek());
+			}
+			entrada = sc.nextLine().split(" ");
+		}
 	}
 }
