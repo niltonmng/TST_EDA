@@ -1,5 +1,7 @@
 package questoes;
 
+import java.util.Scanner;
+
 public class Fila {
 
 	private int capacidade;
@@ -80,5 +82,47 @@ public class Fila {
 			saida += fila[i] + " ";
 		}
 		return saida.trim();
+	}
+	
+	
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+		
+		String tamanho = sc.nextLine();
+		Fila fila = new Fila(Integer.parseInt(tamanho));
+		
+		String[] entrada = sc.nextLine().split(" ");
+		
+		while(true){
+			if(entrada[0].toUpperCase().equals("END")){
+				break;
+			}
+			if(entrada[0].toUpperCase().equals("PRINT")){
+				if(fila.isEmpty()){
+					System.out.println("empty");
+				}else{
+					System.out.println(fila.toString());
+				}
+			}
+			else if(entrada[0].toUpperCase().equals("REMOVE")){
+				if(fila.isEmpty()){
+					System.out.println("empty");
+				}else{
+					fila.remove();					
+				}
+			}
+			else if(entrada[0].toUpperCase().equals("ADD")){
+				if(fila.isFull()){
+					System.out.println("full");
+				}else{
+					fila.add(Integer.parseInt(entrada[1]));					
+				}
+			}
+			else if(entrada[0].toUpperCase().equals("ELEMENT")){
+				System.out.println(fila.head());
+			}
+			entrada = sc.nextLine().split(" ");
+		}
 	}
 }
