@@ -8,13 +8,13 @@ public class Fila {
 	private int head;
 	private int tail;
 	private int[] fila;
-	//private int elementos;
+	private int elementos;
 
 	public Fila(int capacidade){
 		this.capacidade = capacidade;
 		this.head = -1;
 		this.tail = -1;
-		//this.elementos = 0;
+		this.elementos = 0;
 		this.fila = new int[capacidade];
 	}
 
@@ -26,11 +26,7 @@ public class Fila {
 	}
 
 	public boolean isFull(){
-		//if(this.elementos == this.capacidade){
-		//	return true;
-		//}
 		return ((this.tail + 1) % capacidade) == this.head;
-		//return false;
 	}
 
 	public boolean add(int n){
@@ -38,7 +34,7 @@ public class Fila {
 			throw new RuntimeException("FullQueueException!");			
 		}
 		
-		//this.elementos += 1;
+		this.elementos += 1;
 		
 		if(this.isEmpty()){
 			this.head = 0;
@@ -65,7 +61,7 @@ public class Fila {
 		}else{
 			this.head = ((this.head + 1) % capacidade); // a cabeça anda uma posição, partindo de sua posição atual.(claramente, a primeira remoção parte da posição inicial).
 		}
-		//this.elementos -= 1;
+		this.elementos -= 1;
 		return removido;
 	}
 
@@ -94,10 +90,7 @@ public class Fila {
 		
 		String[] entrada = sc.nextLine().split(" ");
 		
-		while(true){
-			if(entrada[0].toUpperCase().equals("END")){
-				break;
-			}
+		while(!entrada[0].toUpperCase().equals("END")){
 			if(entrada[0].toUpperCase().equals("PRINT")){
 				if(fila.isEmpty()){
 					System.out.println("empty");
