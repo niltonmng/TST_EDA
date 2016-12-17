@@ -71,15 +71,21 @@ public class Fila {
 		}
 		return this.fila[head];
 	}
+	
+	
 
 	public String toString(){
 		String saida = "";
-		for (int i = this.head; i <= this.tail; i++) {
-			saida += fila[i] + " ";
+		int[] aux = new int[this.fila.length];
+		
+		// implementar para por no array aux na ordem dos elementos corretos.
+		
+		
+		for (int l = 0; l < aux.length; l++) {
+			saida += aux[l] + " ";
 		}
 		return saida.trim();
-	}
-	
+	}	
 	
 	public static void main(String[] args) {
 
