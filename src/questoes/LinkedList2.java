@@ -68,7 +68,37 @@ public class LinkedList2 {
 		} else {
 			addLast(node.next, n);
 		}
-
+	}
+	
+	public void insereOrdenado(int n){ 
+		
+		Node newNode = new Node(n);
+		
+		if(this.head.value >= n){
+			newNode.next = this.head;
+			this.head.previous = newNode;
+			this.head = newNode;
+		}
+		else{
+			Node aux = this.head.next; // bugado! falta correção
+			boolean inseriu = false;
+			
+			while(aux.next != null){
+				if(n < aux.value){
+					newNode.next = aux;
+					newNode.previous = aux.previous;
+					aux.previous.next = newNode;
+					aux.previous = newNode;
+					inseriu = true;
+					break;
+				}
+				aux = aux.next;
+			}
+			
+			if(inseriu == false){			
+				aux.next = newNode;
+			}			
+		}
 	}
 	
 	
@@ -84,6 +114,23 @@ public class LinkedList2 {
 		else {
 			return node.value + " " + toString(node.next);
 		}
+	}
+	
+	
+	public static void main(String[] args) {
+		LinkedList2 lista = new LinkedList2();
+		Node no1 = new Node(10);
+		lista.head = no1;
+		
+		lista.insereOrdenado(5);
+		lista.insereOrdenado(3);
+		lista.insereOrdenado(2);
+		lista.insereOrdenado(100);
+		lista.insereOrdenado(7);
+		lista.insereOrdenado(5);
+		lista.insereOrdenado(20);
+		System.out.println(lista.toString());
+		
 	}
 	
 	

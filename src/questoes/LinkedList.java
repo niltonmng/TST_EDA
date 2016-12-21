@@ -31,7 +31,7 @@ public class LinkedList {
 	
 	private Node search(int n){
 		Node aux = head;
-		while(aux.next != null && aux.valor != n){
+		while(aux.next != null && aux.value != n){
 			aux = aux.next;
 		}
 		return aux;
@@ -40,7 +40,7 @@ public class LinkedList {
 	public boolean remove(int n){
 		if(!isEmpty()){
 			
-			if(this.head.valor == n){
+			if(this.head.value == n){
 				this.head = this.head.next;
 				this.size -= 1;
 				return true;
@@ -49,7 +49,7 @@ public class LinkedList {
 			Node prev = null;
 			Node aux = this.head;
 			
-			while(aux.next != null && aux.valor != n){
+			while(aux.next != null && aux.value != n){
 				prev = aux;
 				aux = aux.next;
 			}
@@ -100,14 +100,14 @@ public class LinkedList {
 		String saida = "";
 		Node aux = head;
 		while(aux.next != null){
-			saida += aux.valor + " ";
+			saida += aux.value + " ";
 			aux = aux.next;
 		}
 		return saida.trim();
 	}
 
 }
-
+/*
 class Node {
 	
 	Node next;
@@ -117,4 +117,4 @@ class Node {
 		this.next = null;
 		this.valor = valor;
 	}
-}
+}*/

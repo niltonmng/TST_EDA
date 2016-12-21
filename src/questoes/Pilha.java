@@ -85,6 +85,45 @@ public class Pilha {
 	public int[] getPilha(){
 		return this.pilha;
 	}
+	
+	public void sort(){
+		int[] array = new int[capacidade];
+		for(int i = 0; i < array.length; i++){
+			array[i] = pilha[i];
+		}
+		this.quickSort(array, 0, array.length);
+		for(int i = 0; i < array.length; i++){
+			this.pop();
+		}
+		for(int i = 0; i < array.length; i++){
+			this.push(array[i]);
+		}
+	}
+	
+	private void quickSort(int[] array, int left, int right){
+		if(left > right){
+			int mid = this.particiona(array, left, right);
+			quickSort(array, 0, left-1);
+			quickSort(array, left+1, right);
+		}
+	}
+	private int particiona(int[] array, int left, int right){
+		int i = left;
+		int pivot = array[i];
+		for (int j = i+1; j < array.length; j++) {
+			if(array[j] < pivot){
+				i++;
+				swap(array,i,j);
+			}
+		}
+		swap(array,left,i);
+		return i;
+	}
+	private void swap(int[] array, int i, int j){
+		int aux = array[i];
+		array[i] = array[j];
+		array[j] = aux;
+	}
 
 	public String toString(){
 		String saida = "";

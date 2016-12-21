@@ -30,7 +30,7 @@ public class QuickSort {
 		int pivot = v[ini];
 		int i = ini;
 
-		for (int j = ini + 1; j <= fim; j++) {
+		for (int j = ini + 1; j < v.length; j++) {
 			if (v[j] < pivot) {
 				i+=1;
 				swap(v, i, j);

@@ -40,7 +40,7 @@ public class StackTest {
 		assertEquals(pilha.size(),1);
 		
 		pilha.push(1);
-		assertTrue(pilha.getIndexMax() == 1);
+		assertEquals(1, pilha.getIndexMax());
 		assertTrue(pilha.peek() == 1);
 		assertEquals(pilha.size(),2);
 		
