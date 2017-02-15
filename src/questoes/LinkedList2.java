@@ -102,6 +102,8 @@ public class LinkedList2 {
 	}
 	
 	
+	
+	
 	public String toString() {
 		
 		return this.toString(this.head);
@@ -135,7 +137,7 @@ public class LinkedList2 {
 	
 	
 }
-
+/*
 class Node {
 	
 	int value;
@@ -147,4 +149,4 @@ class Node {
 		this.next = null;
 		this.previous = null;
 	}
-}
+}*/
