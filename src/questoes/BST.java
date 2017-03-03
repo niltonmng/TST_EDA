@@ -34,7 +34,7 @@ public class BST {
 	}
 
 	public boolean add(int value){
-		if(value <= 0){
+		if(value == (Integer) null){
 			return this.add(this.root, value);
 		}
 		return false;
@@ -58,6 +58,45 @@ public class BST {
 			return this.add(node.right, value);
 	}
 	
+	
+	public void remove(int value){
+		Node node = this.search(value);
+		if(!node.isEmpty() && value != (Integer) null){
+			this.remove(node);
+		}
+	}
+	
+	@SuppressWarnings("null")
+	private void remove(Node node) {
+		if(node.isLeaf()){
+			node.value = (Integer) null;
+			node.left = null;
+			node.right = null;
+		}
+		else if(node.left.isEmpty()){ // caso nao possua filho esquerdo
+			node.value = node.right.value; // recebe o valor do da direita
+			node.left = node.right.left; // aponto para o esquerda do meu filho á direita
+			node.right = node.right.right; // minha direita se torna o filho da direita do meu filho á direita
+			node.right.parent = node; // me defino como pai do meu novo filho á direita
+			node.left.parent = node; // me defino como novo pai do meu novo fiho á esquerda
+		}
+		else if(node.right.isEmpty()){ // caso nao possua filho direito
+			node.value = node.left.value;
+			node.right = node.left.right;
+			node.left = node.left.left;
+			node.left.parent = node; 
+			node.right.parent = node; 
+		}
+		else{ // caso possua os dois filhos
+			int aux = node.value;
+			Node sucessor = this.sucessor(aux); // faço uma troca de valores com o sucessor do no. recursivamente
+			node.value = sucessor.value; // no qual ele vai trocando de valores entre os nós e seus sucessores
+			sucessor.value = aux; //  ate encontrar um elemento no qual se encaixe em algum dos ifs acima.
+			this.remove(sucessor);
+		}
+		
+	}
+
 	public Node minimum(){
 		if(this.isEmpty()){
 			return null;
@@ -87,7 +126,7 @@ public class BST {
 	}
 	
 	public Node search(int value){
-		if(!isEmpty() && value > 0){
+		if(!isEmpty() && value != (Integer) null){
 			return this.search(this.root, value);
 		}
 		return null;
@@ -123,6 +162,27 @@ public class BST {
 			return parent;
 		}
 		return this.sucessor(node, parent.parent);
+	}
+	
+	public Node predecessor(int value){
+		Node node = this.search(value);
+		
+		if(value != (Integer) null && node != null){
+			return this.maximum(node);
+		}else{
+			return this.predecessor(node, node.parent);
+		}
+	}
+
+	private Node predecessor(Node node, Node parent) {
+		if(parent == null) {
+			return null;
+		}
+		if(parent.value < node.value) {
+			return parent;
+		}else{
+			return this.predecessor(node, parent.parent);
+		}
 	}
 
 	public int[] preOrder(){

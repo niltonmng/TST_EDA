@@ -14,4 +14,14 @@ public class Node {
 		this.right = null;
 		this.value = value;
 	}
+	
+	
+	public boolean isEmpty(){
+		return this == null;
+	}
+	
+	
+	public boolean isLeaf(){
+		return this.value == (Integer) null && this.left.isEmpty() && this.right.isEmpty();
+	}
 }
